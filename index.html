@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
-<head>
+<head>  
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Savia – CRM Salud · Lic. Silvia Molina</title>
@@ -47,8 +47,7 @@
     }
     header{
       padding:14px 18px;
-      background: #4BAF8C;
-
+      background:#4BAF8C;
       color:white;
       box-shadow:0 10px 30px rgba(15,23,42,.22);
       position:sticky;
@@ -62,6 +61,7 @@
       align-items:center;
       justify-content:space-between;
       gap:16px;
+      flex-wrap:wrap;
     }
     .brand{
       display:flex;
@@ -95,6 +95,7 @@
       letter-spacing:.18em;
       opacity:.9;
     }
+
     .header-cta{
       display:flex;
       flex-wrap:wrap;
@@ -112,6 +113,13 @@
       align-items:center;
       gap:6px;
       white-space:nowrap;
+    }
+
+    /* Ocultar cartel Savia en celular */
+    @media (max-width:768px){
+      .header-cta{
+        display:none;
+      }
     }
 
     /* ===== TABS SECCIONES ===== */
@@ -628,6 +636,7 @@
       resize:vertical;
       min-height:32px;
       background:#fff;
+      width:100%;
     }
     input:focus,textarea:focus,select:focus{
       border-color:var(--turquesa);
@@ -653,18 +662,85 @@
     .mt-4{margin-top:4px;}
     .mt-6{margin-top:6px;}
     .mt-10{margin-top:10px;}
+
     /* Escala general de la página a 90 % en escritorio */
-html{
-  zoom: 0.9;              /* funciona en Chrome / Edge */
-}
+    html{
+      zoom:0.9;              /* funciona en Chrome / Edge */
+    }
 
-/* En celular dejamos el tamaño normal para no romper el diseño */
-@media (max-width: 768px){
-  html{
-    zoom: 1;
-  }
-}
+    /* En celular dejamos el tamaño normal para no romper el diseño */
+    @media (max-width:768px){
+      html{
+        zoom:1;
+      }
+    }
 
+    /* Header + layout más cómodo en celular
+       y FORMULARIOS / BOTONES acomodados */
+    @media (max-width:600px){
+      header{
+        padding:12px 16px;
+      }
+      .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .brand-text h1{
+        font-size:18px;
+      }
+      .brand-text span{
+        font-size:10px;
+      }
+
+      /* KPIs una abajo de otra */
+      .kpi-card{
+        flex:1 1 100%;
+      }
+
+      /* Toolbar en columna, sin desbordes */
+      .toolbar{
+        flex-direction:column;
+        align-items:stretch;
+        gap:8px;
+      }
+      .toolbar-left,
+      .toolbar-right{
+        width:100%;
+        justify-content:flex-start;
+      }
+      .toolbar-right{
+        justify-content:stretch;
+      }
+      .search-input{
+        width:100%;
+        min-width:0;
+      }
+
+      /* Formularios: filas en columna */
+      .form-inline{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      /* Pies de formularios: botones en 2 columnas si hay muchos */
+      .modal-footer{
+        flex-wrap:wrap;
+        justify-content:flex-end;
+      }
+      .modal-footer .btn{
+        flex:1 1 calc(50% - 4px);
+        justify-content:center;
+      }
+      /* En la columna de recetas que tiene muchos botones, alineados a la izquierda */
+      .doc-col .modal-footer{
+        justify-content:flex-start;
+      }
+
+      /* Firma: botones no tan pegados */
+      .firma-actions{
+        justify-content:flex-start;
+      }
+    }
   </style>
 </head>
 <body>
@@ -681,10 +757,12 @@ html{
           <h1>Lic. Silvia Molina · Psicóloga</h1>
         </div>
       </div>
+
+      <!-- Cartel Savia solo para escritorio -->
       <div class="header-cta">
         <div class="pill">
-          <span style="font-size:14px;"></span>
-          <span>Savia organiza tus pacientes, turnos y recetas en un solo lugar</span>
+          <span>Savia</span>
+          <span>Tu Agenda mas simple</span>
         </div>
       </div>
     </div>
@@ -735,11 +813,6 @@ html{
             <div class="kpi-value"><span id="kpi-turnos-hoy">0</span></div>
             <div class="kpi-chip">Agenda diaria</div>
           </article>
-          <article class="kpi-card">
-            <div class="kpi-label">Consultas registradas</div>
-            <div class="kpi-value"><span id="kpi-total-consultas">0</span></div>
-            <div class="kpi-chip" id="kpi-ingresos-chip">Ingresos estimados: $0</div>
-          </article>
         </section>
 
         <!-- Toolbar -->
@@ -779,7 +852,7 @@ html{
             <div class="panel-header">
               <div>
                 <div class="panel-title">Detalle de paciente</div>
-                <div class="panel-sub">Ficha básica + historia clínica simple</div>
+                <div class="panel-sub">Ficha básica</div>
               </div>
             </div>
 
@@ -823,15 +896,18 @@ html{
                 <div class="detalle-section-title">Notas / observaciones generales</div>
                 <div class="nota-span" id="detalle-notas">Sin notas cargadas.</div>
 
-                <div class="detalle-section-title">Historia clínica / sesiones</div>
-                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px;">
-                  <span class="small text-muted">Uso interno. No reemplaza la historia clínica oficial de tu sistema.</span>
-                  <button class="btn btn-outline" id="btn-nueva-visita" style="padding:4px 8px;font-size:11px;">+ Registrar consulta</button>
-                </div>
+                <!-- Bloque de historia clínica / registrar consultas OCULTO para que ya no aparezca en la UI -->
+                <div id="historia-clinica-wrapper" style="display:none;">
+                  <div class="detalle-section-title">Historia clínica / sesiones</div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px;">
+                    <span class="small text-muted">Uso interno. No reemplaza la historia clínica oficial de tu sistema.</span>
+                    <button class="btn btn-outline" id="btn-nueva-visita" style="padding:4px 8px;font-size:11px;">+ Registrar consulta</button>
+                  </div>
 
-                <ul class="visitas-list" id="lista-visitas"></ul>
-                <div class="empty-state" id="visitas-empty" style="margin-top:4px;">
-                  Todavía no registraste consultas. Empezá con el botón “Registrar consulta”.
+                  <ul class="visitas-list" id="lista-visitas"></ul>
+                  <div class="empty-state" id="visitas-empty" style="margin-top:4px;">
+                    Todavía no registraste consultas. Empezá con el botón “Registrar consulta”.
+                  </div>
                 </div>
               </div>
             </div>
@@ -987,10 +1063,13 @@ html{
               <div class="detalle-section-title">Vista previa rápida</div>
               <pre id="doc-preview" class="doc-preview"></pre>
 
-              <div class="detalle-section-title">Últimos documentos</div>
-              <ul id="doc-historial" class="visitas-list"></ul>
-              <div id="doc-empty" class="empty-state" style="margin-top:4px;">
-                Todavía no generaste recetas o certificados.
+              <!-- El historial de "últimos documentos" queda oculto visualmente -->
+              <div id="doc-historial-wrapper" style="display:none;">
+                <div class="detalle-section-title">Últimos documentos</div>
+                <ul id="doc-historial" class="visitas-list"></ul>
+                <div id="doc-empty" class="empty-state" style="margin-top:4px;">
+                  Todavía no generaste recetas o certificados.
+                </div>
               </div>
             </div>
           </div>
@@ -1003,7 +1082,7 @@ html{
           <div class="panel-header">
             <div>
               <div class="panel-title">Dashboard general</div>
-              <div class="panel-sub">Resumen de pacientes, turnos y consultas en Savia.</div>
+              <div class="panel-sub">Resumen de pacientes y turnos en Savia.</div>
             </div>
           </div>
 
@@ -1021,38 +1100,9 @@ html{
               <div class="kpi-label">Turnos de hoy</div>
               <div class="kpi-value"><span id="dash-turnos-hoy">0</span></div>
             </article>
-            <article class="kpi-card">
-              <div class="kpi-label">Consultas e ingresos</div>
-              <div class="kpi-value"><span id="dash-total-consultas">0</span></div>
-              <div class="kpi-chip" id="dash-total-ingresos">$0</div>
-            </article>
           </section>
 
           <p class="dash-resumen" id="dash-resumen"></p>
-        </section>
-
-        <section class="content-row" style="margin-top:12px;">
-          <section class="panel">
-            <div class="panel-header">
-              <div>
-                <div class="panel-title">Pacientes frecuentes (clientes seguidos)</div>
-                <div class="panel-sub">Pacientes con 3 o más consultas registradas.</div>
-              </div>
-            </div>
-            <ul id="dash-lista-frecuentes" class="visitas-list"></ul>
-            <div id="dash-empty-frecuentes" class="empty-state">Todavía no tenés pacientes con muchas consultas registradas.</div>
-          </section>
-
-          <section class="panel">
-            <div class="panel-header">
-              <div>
-                <div class="panel-title">Pacientes a recuperar</div>
-                <div class="panel-sub">Más de 45 días sin consulta.</div>
-              </div>
-            </div>
-            <ul id="dash-lista-inactivos" class="visitas-list"></ul>
-            <div id="dash-empty-inactivos" class="empty-state">Por ahora no hay pacientes con más de 45 días sin venir.</div>
-          </section>
         </section>
       </section>
     </div>
@@ -1108,7 +1158,7 @@ html{
   </div>
 </div>
 
-<!-- MODAL NUEVA CONSULTA -->
+<!-- MODAL NUEVA CONSULTA (se mantiene pero el bloque visual está oculto en el detalle) -->
 <div class="modal-backdrop" id="modal-visita-backdrop" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-header">
@@ -1188,6 +1238,7 @@ html{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
   }
 
+  // Datos demo: 10 pacientes para probar el scroll
   function seedDemoData(){
     const hoy = new Date();
     const iso = d => d.toISOString().slice(0,10);
@@ -1200,6 +1251,12 @@ html{
 
     const d3 = new Date(hoy);
     d3.setMonth(hoy.getMonth()-2);
+
+    const d4 = new Date(hoy);
+    d4.setDate(hoy.getDate()-15);
+
+    const d5 = new Date(hoy);
+    d5.setMonth(hoy.getMonth()-1);
 
     const hoyIso = iso(hoy);
 
@@ -1247,6 +1304,90 @@ html{
           visitas:[
             {id:'v4',fecha:iso(d2),monto:10000,nota:'Sesión de seguimiento.'}
           ]
+        },
+        {
+          id:'c4',
+          nombre:'Juan Pérez',
+          servicioPrincipal:'Psicoterapia individual',
+          cobertura:'Particular',
+          whatsapp:'2613111111',
+          email:'juan@example.com',
+          fechaAlta:iso(d4),
+          ultimaVisita:iso(d4),
+          notas:'Trabaja en turnos rotativos.',
+          visitas:[]
+        },
+        {
+          id:'c5',
+          nombre:'Ana Rodríguez',
+          servicioPrincipal:'Orientación a padres',
+          cobertura:'OSEP',
+          whatsapp:'2613222222',
+          email:'',
+          fechaAlta:iso(d5),
+          ultimaVisita:iso(d5),
+          notas:'Padres separados, coordinación de horarios.',
+          visitas:[]
+        },
+        {
+          id:'c6',
+          nombre:'Diego Martínez',
+          servicioPrincipal:'Evaluación psicológica',
+          cobertura:'Particular',
+          whatsapp:'2613333333',
+          email:'diego@example.com',
+          fechaAlta:iso(d3),
+          ultimaVisita:iso(d3),
+          notas:'Proceso de evaluación laboral.',
+          visitas:[]
+        },
+        {
+          id:'c7',
+          nombre:'Valeria Suárez',
+          servicioPrincipal:'Psicoterapia individual',
+          cobertura:'OSDE',
+          whatsapp:'2613444444',
+          email:'valeria@example.com',
+          fechaAlta:iso(d2),
+          ultimaVisita:iso(d1),
+          notas:'Ansiedad y estrés laboral.',
+          visitas:[]
+        },
+        {
+          id:'c8',
+          nombre:'Natalia Herrera',
+          servicioPrincipal:'Acompañamiento terapéutico',
+          cobertura:'Particular',
+          whatsapp:'2613555555',
+          email:'',
+          fechaAlta:iso(d1),
+          ultimaVisita:iso(d1),
+          notas:'Trabaja con acompañante terapéutica externa.',
+          visitas:[]
+        },
+        {
+          id:'c9',
+          nombre:'Sofía Ortiz',
+          servicioPrincipal:'Terapia breve',
+          cobertura:'PAMI',
+          whatsapp:'2613666666',
+          email:'sofia@example.com',
+          fechaAlta:hoyIso,
+          ultimaVisita:hoyIso,
+          notas:'Comenzó proceso este mes.',
+          visitas:[]
+        },
+        {
+          id:'c10',
+          nombre:'Pablo Torres',
+          servicioPrincipal:'Seguimiento post alta',
+          cobertura:'Particular',
+          whatsapp:'2613777777',
+          email:'pablo@example.com',
+          fechaAlta:iso(d5),
+          ultimaVisita:iso(d4),
+          notas:'Sesiones quincenales.',
+          visitas:[]
         }
       ],
       turnos:[
@@ -1302,32 +1443,14 @@ html{
     const mesActual = hoy.getMonth();
     const anioActual = hoy.getFullYear();
 
-    let totalConsultas = 0;
-    let totalIngresos = 0;
     let nuevosMes = 0;
-    const clientesFrecuentes = [];
-    const clientesInactivos = [];
 
     clientes.forEach(c => {
-      const visitas = c.visitas || [];
-      totalConsultas += visitas.length;
-      visitas.forEach(v => {
-        totalIngresos += Number(v.monto || 0);
-      });
-
       if(c.fechaAlta){
         const d = new Date(c.fechaAlta+'T00:00:00');
         if(d.getMonth()===mesActual && d.getFullYear()===anioActual){
           nuevosMes++;
         }
-      }
-
-      if(visitas.length >= 3){
-        clientesFrecuentes.push(c);
-      }
-      const diff = daysDiffFromToday(c.ultimaVisita);
-      if(diff !== null && diff > 45){
-        clientesInactivos.push(c);
       }
     });
 
@@ -1337,11 +1460,7 @@ html{
     return {
       totalClientes: clientes.length,
       nuevosMes,
-      totalConsultas,
-      totalIngresos,
       turnosHoy,
-      clientesFrecuentes,
-      clientesInactivos,
       mesActual,
       anioActual
     };
@@ -1354,8 +1473,6 @@ html{
     document.getElementById('dash-total-clientes').textContent = metrics.totalClientes;
     document.getElementById('dash-nuevos-mes').textContent = metrics.nuevosMes;
     document.getElementById('dash-turnos-hoy').textContent = metrics.turnosHoy;
-    document.getElementById('dash-total-consultas').textContent = metrics.totalConsultas;
-    document.getElementById('dash-total-ingresos').textContent = formatMoney(metrics.totalIngresos);
 
     const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     const mesTexto = meses[metrics.mesActual] + ' ' + metrics.anioActual;
@@ -1364,80 +1481,8 @@ html{
     const resumenElem = document.getElementById('dash-resumen');
     if(resumenElem){
       resumenElem.textContent =
-        `Tenés ${metrics.totalClientes} pacientes activos, ${metrics.nuevosMes} nuevos este mes y ${metrics.totalConsultas} consultas cargadas en Savia. ` +
-        `Ingresos estimados (según lo que cargaste): ${formatMoney(metrics.totalIngresos)}.`;
-    }
-
-    // Pacientes frecuentes
-    const listaF = document.getElementById('dash-lista-frecuentes');
-    const emptyF = document.getElementById('dash-empty-frecuentes');
-    listaF.innerHTML = '';
-    if(metrics.clientesFrecuentes.length === 0){
-      emptyF.style.display = 'block';
-    }else{
-      emptyF.style.display = 'none';
-      metrics.clientesFrecuentes.forEach(c => {
-        const li = document.createElement('li');
-        li.className = 'visita-item';
-
-        const left = document.createElement('div');
-        left.className = 'visita-left';
-
-        const nombre = document.createElement('div');
-        nombre.textContent = c.nombre || '(Sin nombre)';
-
-        const detalle = document.createElement('div');
-        detalle.className = 'visita-nota';
-        detalle.textContent = `Consultas registradas: ${(c.visitas || []).length}`;
-
-        left.appendChild(nombre);
-        left.appendChild(detalle);
-
-        const right = document.createElement('div');
-        right.className = 'visita-monto';
-        right.textContent = formatMoney(
-          (c.visitas || []).reduce((acc,v)=> acc + Number(v.monto||0),0)
-        );
-
-        li.appendChild(left);
-        li.appendChild(right);
-        listaF.appendChild(li);
-      });
-    }
-
-    // Pacientes inactivos
-    const listaI = document.getElementById('dash-lista-inactivos');
-    const emptyI = document.getElementById('dash-empty-inactivos');
-    listaI.innerHTML = '';
-    if(metrics.clientesInactivos.length === 0){
-      emptyI.style.display = 'block';
-    }else{
-      emptyI.style.display = 'none';
-      metrics.clientesInactivos.forEach(c => {
-        const li = document.createElement('li');
-        li.className = 'visita-item';
-
-        const left = document.createElement('div');
-        left.className = 'visita-left';
-
-        const nombre = document.createElement('div');
-        nombre.textContent = c.nombre || '(Sin nombre)';
-
-        const diff = daysDiffFromToday(c.ultimaVisita);
-        const detalle = document.createElement('div');
-        detalle.className = 'visita-nota';
-        detalle.textContent = `Última consulta: ${formatDate(c.ultimaVisita)} · Hace ${diff} día(s)`;
-
-        left.appendChild(nombre);
-        left.appendChild(detalle);
-
-        const right = document.createElement('div');
-        right.className = 'visita-monto';
-        right.textContent = (c.visitas || []).length + ' sesión(es)';
-        li.appendChild(left);
-        li.appendChild(right);
-        listaI.appendChild(li);
-      });
+        `Tenés ${metrics.totalClientes} pacientes activos y ${metrics.nuevosMes} nuevos este mes. ` +
+        `Hoy tenés ${metrics.turnosHoy} turno(s) en la agenda.`;
     }
   }
 
@@ -1448,8 +1493,6 @@ html{
     document.getElementById('kpi-total-clientes').textContent = metrics.totalClientes;
     document.getElementById('kpi-nuevos-mes').textContent = metrics.nuevosMes;
     document.getElementById('kpi-turnos-hoy').textContent = metrics.turnosHoy;
-    document.getElementById('kpi-total-consultas').textContent = metrics.totalConsultas;
-    document.getElementById('kpi-ingresos-chip').textContent = 'Ingresos estimados: ' + formatMoney(metrics.totalIngresos);
 
     const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     document.getElementById('kpi-mes-label').textContent = meses[metrics.mesActual] + ' ' + metrics.anioActual;
@@ -1615,47 +1658,49 @@ html{
     document.getElementById('detalle-cobertura').textContent = cliente.cobertura || '—';
     document.getElementById('detalle-notas').textContent = cliente.notas || 'Sin notas cargadas.';
 
-    // Historial de consultas
+    // Historial de consultas (queda oculto en la UI principal)
     const listaVisitas = document.getElementById('lista-visitas');
     const vacioVisitas = document.getElementById('visitas-empty');
-    listaVisitas.innerHTML = '';
+    if(listaVisitas && vacioVisitas){
+      listaVisitas.innerHTML = '';
 
-    const visitas = cliente.visitas || [];
-    if(visitas.length === 0){
-      vacioVisitas.style.display = 'block';
-    }else{
-      vacioVisitas.style.display = 'none';
+      const visitas = cliente.visitas || [];
+      if(visitas.length === 0){
+        vacioVisitas.style.display = 'block';
+      }else{
+        vacioVisitas.style.display = 'none';
+      }
+
+      visitas
+        .slice()
+        .sort((a,b)=> (a.fecha || '').localeCompare(b.fecha || ''))
+        .reverse()
+        .forEach(v => {
+          const li = document.createElement('li');
+          li.className = 'visita-item';
+
+          const left = document.createElement('div');
+          left.className = 'visita-left';
+
+          const fecha = document.createElement('div');
+          fecha.textContent = formatDate(v.fecha);
+
+          const nota = document.createElement('div');
+          nota.className = 'visita-nota';
+          nota.textContent = v.nota || 'Sin detalle.';
+
+          left.appendChild(fecha);
+          left.appendChild(nota);
+
+          const monto = document.createElement('div');
+          monto.className = 'visita-monto';
+          monto.textContent = formatMoney(Number(v.monto || 0));
+
+          li.appendChild(left);
+          li.appendChild(monto);
+          listaVisitas.appendChild(li);
+        });
     }
-
-    visitas
-      .slice()
-      .sort((a,b)=> (a.fecha || '').localeCompare(b.fecha || ''))
-      .reverse()
-      .forEach(v => {
-        const li = document.createElement('li');
-        li.className = 'visita-item';
-
-        const left = document.createElement('div');
-        left.className = 'visita-left';
-
-        const fecha = document.createElement('div');
-        fecha.textContent = formatDate(v.fecha);
-
-        const nota = document.createElement('div');
-        nota.className = 'visita-nota';
-        nota.textContent = v.nota || 'Sin detalle.';
-
-        left.appendChild(fecha);
-        left.appendChild(nota);
-
-        const monto = document.createElement('div');
-        monto.className = 'visita-monto';
-        monto.textContent = formatMoney(Number(v.monto || 0));
-
-        li.appendChild(left);
-        li.appendChild(monto);
-        listaVisitas.appendChild(li);
-      });
   }
 
   // ====== MODALES ======
@@ -1766,7 +1811,8 @@ html{
   function eliminarTurno(id){
     const ok = confirm('¿Eliminar este turno?');
     if(!ok) return;
-    appState.turnos = (appState.turnos || []).filter(t => t.id !== id);
+    appState.turnos = appState.turnos || [];
+    appState.turnos = appState.turnos.filter(t => t.id !== id);
     saveState();
     renderAgenda();
   }
@@ -2160,6 +2206,8 @@ html{
   function renderDocHistorial(){
     const lista = document.getElementById('doc-historial');
     const empty = document.getElementById('doc-empty');
+    if(!lista || !empty) return;
+
     const docs = appState.documentos || [];
     lista.innerHTML = '';
 
@@ -2432,7 +2480,7 @@ html{
       window.open(url,'_blank');
     });
 
-    // Registrar consulta
+    // Registrar consulta (aunque el bloque del detalle está oculto visualmente)
     document.getElementById('btn-nueva-visita').addEventListener('click', openModalVisita);
     document.getElementById('cerrar-modal-visita').addEventListener('click', closeModalVisita);
     document.getElementById('cancelar-modal-visita').addEventListener('click', closeModalVisita);
