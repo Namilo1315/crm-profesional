@@ -105,40 +105,45 @@
       object-fit:contain;
       display:block;
     }
+
+    /* ✅ achica solo en móvil y lo mantiene en 1 línea */
     .topbar h1{
       font-family:"Nunito",system-ui,sans-serif;
       font-weight:800;
-      font-size:1.35rem;
-      line-height:1.1;
+      font-size:clamp(1.02rem, 3.7vw, 1.35rem); /* responsive */
+      line-height:1.05;
+      white-space:nowrap; /* 1 sola línea */
       text-shadow:0 10px 22px rgba(0,0,0,.18);
     }
 
     .wrap{ padding:18px 18px 26px; }
 
-    /* ✅ HERO con logo flotante */
+    /* HERO con logo flotante */
     .hero{
-      position:relative;               /* para poder ubicar el logo arriba */
+      position:relative;
       border-radius:26px;
       background:rgba(255,255,255,.10);
       border:1px solid rgba(255,255,255,.18);
-      padding:56px 14px 16px;          /* ✅ más padding arriba para que el texto no choque */
+
+      /* ✅ subo “PictoComunica”: menos padding arriba (había mucho espacio) */
+      padding:44px 14px 16px;
+
       box-shadow:0 16px 34px rgba(0,0,0,.16);
       text-align:center;
     }
 
-    /* ✅ Logo blanco del medio: más arriba, un poquito más chico, y animación sube/baja */
     @keyframes logoFloat{
       0%,100%{ transform:translate(-50%,-50%) translateY(0); }
       50%    { transform:translate(-50%,-50%) translateY(-10px); }
     }
 
     .logo{
-      width:58px;height:58px;          /* ✅ un poquito más chico */
+    
       position:absolute;
       left:50%;
-      top:0;                           /* ✅ queda entre el borde superior */
+      top:0;
       transform:translate(-50%,-50%);
-      border-radius:16px;
+  
       background:rgba(255,255,255,.96);
       border:1px solid rgba(15,23,42,.08);
       box-shadow:0 18px 34px rgba(0,0,0,.22);
@@ -146,10 +151,10 @@
       overflow:hidden;
       animation:logoFloat 3.2s ease-in-out infinite;
       will-change:transform;
+      width:60px; height:60px; border-radius:18px;
     }
     .logo img{width:88%;height:88%;object-fit:contain;display:block;}
 
-    /* si el usuario no quiere animaciones */
     @media (prefers-reduced-motion: reduce){
       .logo{ animation:none; }
     }
@@ -160,7 +165,9 @@
       color:#ffffff;
       font-size:1.65rem;
       letter-spacing:.01em;
-      margin-top:2px;
+
+      /* ✅ lo subo un toque más (afinación fina) */
+      margin-top:-6px;
     }
     .subtitle{
       margin-top:6px;
@@ -425,8 +432,14 @@
 
     @media (max-width:420px){
       .grid{grid-template-columns:repeat(3, 1fr);}
-      .hero{ padding:54px 14px 16px; }
-      .logo{ width:52px; height:52px; border-radius:14px; }
+
+      /* ✅ más compacto en celu */
+      .topbar{ padding:12px 12px; gap:10px; }
+      .topbar h1{ font-size:1.02rem; }
+
+      .hero{ padding:42px 14px 16px; }
+      .logo{ width:60px; height:60px; border-radius:18px; }
+      .brand{ margin-top:-8px; }
     }
   </style>
 </head>
@@ -443,7 +456,6 @@
 
     <div class="wrap">
 
-      <!-- HERO -->
       <section class="hero" id="inicio">
         <div class="logo">
           <img src="img/logo.png" alt="Logo PictoComunica">
@@ -461,7 +473,6 @@
         </div>
 
         <div class="social">
-          <!-- CAMBIÁ tus links -->
           <a href="https://www.instagram.com/TU_INSTAGRAM/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="https://wa.me/549XXXXXXXXXX" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           <a href="mailto:TU_MAIL@correo.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
@@ -469,7 +480,6 @@
         </div>
       </section>
 
-      <!-- CATEGORÍAS -->
       <div class="section-title" style="margin-top:18px;">
         <span class="line"></span> Pictogramas Categorías <span class="line"></span>
       </div>
@@ -485,7 +495,6 @@
         <button class="cat c-animales" type="button"><span>Animales</span><i class="fa-solid fa-paw"></i></button>
       </section>
 
-      <!-- LINKS PRINCIPALES -->
       <section class="links">
         <a class="link" href="https://pictocomunica.com.ar/pictogramas.html" target="_blank">
           <span class="ico"><i class="fa-solid fa-tablet-screen-button"></i></span>
@@ -520,7 +529,6 @@
         </a>
       </section>
 
-      <!-- DEMO -->
       <section id="demo" class="demo-wrap">
         <div class="demo-head">
           <div><strong>Demo rápida:</strong> tocá pictos → armá frase → reproducí</div>
