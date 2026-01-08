@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PictoComunica · Links</title>
+
+  <link rel="icon" type="image/png" href="img/logo-picto.png">
+
+  <!-- Tipos -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    :root{
+      /* ===== Colores tomados de tus capturas ===== */
+      --hdr-1:#F6483B;
+      --hdr-2:#FB8C5F;
+      --hdr-3:#FEB261;
+
+      --rutina:#F6B463;
+      --numeros:#F95A53;
+      --letras:#57AA35;
+      --emociones:#52B9E0;
+      --hablemos:#DF7FCB;
+      --dibujar:#3C81C9;
+      --ingles:#FAE668;
+      --animales:#70FB78;
+
+      --bar-1:#FFD53E;
+      --bar-2:#FFC542;
+      --bar-3:#FFB746;
+
+      --ink:#152b2b;
+      --muted:#5c6b6b;
+      --white:#fff;
+
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:16px;
+
+      --shadow:0 26px 70px rgba(0,0,0,.30);
+      --shadow-soft:0 14px 34px rgba(15,23,42,.18);
+
+      --glass:rgba(255,255,255,.10);
+      --stroke:rgba(255,255,255,.22);
+      --ease:cubic-bezier(.2,.85,.2,1);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+
+    /* ✅ Fondo sin “azul” en el medio (saqué el blob azul y cambié el degradé base a verde) */
+    body{
+      font-family:"Poppins",system-ui,-apple-system,sans-serif;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      padding:32px 12px 18px;
+      color:var(--ink);
+
+      background:
+    radial-gradient(circle at 10% 12%, rgba(82,185,224,.22) 0, transparent 58%),
+    radial-gradient(circle at 92% 18%, rgba(60,129,201,.22) 0, transparent 62%),
+    radial-gradient(circle at 14% 90%, rgba(123,214,243,.20) 0, transparent 60%),
+    radial-gradient(circle at 88% 86%, rgba(99,165,238,.18) 0, transparent 60%),
+    linear-gradient(145deg, #0B2A4A, #0A3E6B);
+    }
+
+    .page{
+      width:100%;
+      max-width:520px;
+      border-radius:var(--radius-xl);
+      background:var(--glass);
+      border:1px solid var(--stroke);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* barra superior como tu sitio */
+    .topbar{
+      padding:14px 16px;
+      background:linear-gradient(90deg, var(--hdr-1), var(--hdr-2), var(--hdr-3));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      color:#fff;
+      position:relative;
+    }
+    .topbar .mascota{
+      width:42px;height:42px;
+      border-radius:12px;
+      background:rgba(255,255,255,.20);
+      border:1px solid rgba(255,255,255,.35);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .topbar .mascota img{
+      width:90%;height:90%;
+      object-fit:contain;
+      display:block;
+    }
+    .topbar h1{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:800;
+      font-size:1.35rem;
+      line-height:1.1;
+      text-shadow:0 10px 22px rgba(0,0,0,.18);
+    }
+
+    .wrap{ padding:18px 18px 26px; }
+
+    /* header card */
+    .hero{
+      border-radius:26px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      padding:16px 14px;
+      box-shadow:0 16px 34px rgba(0,0,0,.16);
+      text-align:center;
+    }
+
+    /* ✅ logo del medio un poquito más chico y un poquito más abajo */
+    .logo{
+      width:96px;height:96px;
+      margin:-22px auto 10px; /* antes -34 */
+      border-radius:28px;
+      background:rgba(255,255,255,.96);
+      border:1px solid rgba(15,23,42,.08);
+      box-shadow:0 16px 28px rgba(0,0,0,.18);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .logo img{width:86%;height:86%;object-fit:contain;display:block;}
+
+    .brand{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:800;
+      color:#ffffff;
+      font-size:1.65rem;
+      letter-spacing:.01em;
+      margin-top:2px;
+    }
+    .subtitle{
+      margin-top:6px;
+      color:rgba(255,255,255,.92);
+      font-size:.93rem;
+      line-height:1.35;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:10px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.26);
+      color:#fff;
+      font-size:.74rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .social{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin-top:14px;
+    }
+    .social a{
+      width:40px;height:40px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,255,255,.85);
+      display:flex;align-items:center;justify-content:center;
+      text-decoration:none;
+      color:#fff;
+      background:rgba(255,255,255,.07);
+      backdrop-filter:blur(8px);
+      transition:transform .18s var(--ease), background .18s var(--ease), color .18s var(--ease), box-shadow .18s var(--ease);
+    }
+    .social a:hover{
+      transform:translateY(-2px);
+      background:#fff;
+      color:#0a6a60;
+      box-shadow:0 10px 22px rgba(0,0,0,.20);
+    }
+
+    /* categorias estilo tus botones (✅ vuelven como estaban: bien coloridos) */
+    .section-title{
+      margin:16px 2px 10px;
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:800;
+      color:#fff;
+      letter-spacing:.02em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:center;
+    }
+    .section-title .line{
+      height:2px;
+      width:40px;
+      background:rgba(255,255,255,.55);
+      border-radius:999px;
+    }
+
+    .cats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .cat{
+      border:none;
+      border-radius:20px;
+      padding:14px 14px;
+      color:#fff;
+      font-weight:800;
+      letter-spacing:.01em;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      box-shadow:0 12px 24px rgba(0,0,0,.18);
+      cursor:pointer;
+      transition:transform .16s var(--ease), filter .16s var(--ease), box-shadow .16s var(--ease);
+    }
+    .cat i{font-size:1.12rem;opacity:.95;}
+    .cat:hover{transform:translateY(-2px);filter:brightness(1.03);box-shadow:0 16px 32px rgba(0,0,0,.22);}
+
+    .c-rutina{background:linear-gradient(135deg,var(--rutina), #f7c07f);}
+    .c-numeros{background:linear-gradient(135deg,var(--numeros), #ff7d77);}
+    .c-letras{background:linear-gradient(135deg,var(--letras), #7bdc4f);}
+    .c-emociones{background:linear-gradient(135deg,var(--emociones), #7bd6f3);}
+    .c-hablemos{background:linear-gradient(135deg,var(--hablemos), #f0a1dd);}
+    .c-dibujar{background:linear-gradient(135deg,var(--dibujar), #63a5ee);}
+    .c-ingles{background:linear-gradient(135deg,var(--ingles), #fff0a3); color:#18322E;}
+    .c-animales{background:linear-gradient(135deg,var(--animales), #9bff9f); color:#18322E;}
+
+    /* LINKS (✅ quedan como estaban) */
+    .links{
+      margin-top:14px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .link{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 16px;
+      border-radius:22px;
+      text-decoration:none;
+      font-weight:800;
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+      transition:transform .16s var(--ease), box-shadow .16s var(--ease), filter .16s var(--ease);
+      color:#0f172a;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(15,23,42,.08);
+    }
+    .link:hover{transform:translateY(-3px);filter:brightness(1.02);box-shadow:0 18px 38px rgba(15,23,42,.22);}
+
+    .ico{
+      width:38px;height:38px;
+      border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;
+      color:#0a6a60;
+      background:linear-gradient(135deg, rgba(255,213,62,.95), rgba(255,183,70,.95));
+      border:1px solid rgba(15,23,42,.06);
+    }
+    .link small{
+      display:block;
+      font-weight:600;
+      color:#5b6b6b;
+      margin-top:2px;
+      font-size:.78rem;
+    }
+
+    /* DEMO - barra amarilla como tu pagina pictos */
+    .demo-wrap{ margin-top:14px; display:none; }
+    .demo-head{
+      border-radius:18px;
+      padding:10px 12px;
+      background:linear-gradient(90deg, var(--bar-1), var(--bar-2), var(--bar-3));
+      color:#18322E;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      box-shadow:0 12px 22px rgba(0,0,0,.16);
+      border:1px solid rgba(15,23,42,.08);
+    }
+    .demo-head strong{font-family:"Nunito",system-ui,sans-serif;font-weight:900;}
+    .demo-close{
+      border:none;
+      width:32px;height:32px;
+      border-radius:999px;
+      background:rgba(255,255,255,.70);
+      cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      transition:transform .16s var(--ease), background .16s var(--ease);
+    }
+    .demo-close:hover{transform:translateY(-1px); background:#fff;}
+
+    .demo{
+      margin-top:10px;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:24px;
+      padding:14px;
+      box-shadow:0 14px 30px rgba(0,0,0,.14);
+      color:var(--ink);
+    }
+    .demo p{color:var(--muted);font-size:.86rem;line-height:1.35;margin-top:6px;}
+
+    .phrase{
+      margin-top:10px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      padding:10px;
+      box-shadow:0 10px 22px rgba(0,0,0,.10);
+    }
+    .phrase small{display:block;color:#64748b;font-weight:800;font-size:.72rem;margin-bottom:6px;}
+    .strip{display:flex;flex-wrap:wrap;gap:8px;min-height:44px;align-items:center;}
+    .token{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;
+      border-radius:16px;
+      border:1px solid rgba(15,23,42,.08);
+      background:linear-gradient(135deg, rgba(82,185,224,.18), rgba(246,180,99,.18));
+      font-weight:900;
+      font-size:.88rem;
+    }
+    .token img{width:22px;height:22px;object-fit:contain;}
+    .token button{border:none;background:transparent;cursor:pointer;opacity:.7;}
+    .token button:hover{opacity:1;}
+
+    .grid{
+      margin-top:10px;
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:10px;
+    }
+    .pbtn{
+      border:none; cursor:pointer;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      box-shadow:0 10px 20px rgba(0,0,0,.10);
+      padding:10px 8px;
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      transition:transform .14s var(--ease), box-shadow .14s var(--ease);
+    }
+    .pbtn:hover{transform:translateY(-2px); box-shadow:0 14px 26px rgba(0,0,0,.14);}
+    .pbtn img{width:34px;height:34px;object-fit:contain;}
+    .pbtn span{font-size:.70rem;font-weight:900;letter-spacing:.02em;color:#0f172a;line-height:1;}
+
+    .btns{display:flex;gap:10px;margin-top:10px;}
+    .btn{
+      flex:1;border:none;cursor:pointer;
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:900;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      box-shadow:0 14px 28px rgba(0,0,0,.16);
+      transition:transform .15s var(--ease), filter .15s var(--ease);
+    }
+    .btn:hover{transform:translateY(-2px); filter:brightness(1.03);}
+    .btn-play{background:linear-gradient(135deg,var(--letras), #2e8a2a); color:#fff;}
+    .btn-clear{background:linear-gradient(135deg,var(--bar-1), var(--bar-3)); color:#18322E;}
+
+    /* WhatsApp flotante como tu web */
+    .wa-float{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:56px;height:56px;
+      border-radius:999px;
+      background:#25D366;
+      color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      text-decoration:none;
+      box-shadow:0 18px 32px rgba(0,0,0,.25);
+      border:3px solid rgba(255,255,255,.75);
+      z-index:50;
+      transition:transform .16s var(--ease), filter .16s var(--ease);
+    }
+    .wa-float i{font-size:1.6rem;}
+    .wa-float:hover{transform:translateY(-3px);filter:brightness(1.03);}
+
+    .footer{
+      margin-top:16px;
+      text-align:center;
+      font-size:.78rem;
+      color:rgba(255,255,255,.92);
+      opacity:.92;
+    }
+
+    @media (max-width:420px){
+      .grid{grid-template-columns:repeat(3, 1fr);}
+      .logo{ width:90px; height:90px; margin:-18px auto 10px; border-radius:26px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <div class="topbar">
+      <div class="mascota" aria-hidden="true">
+        <!-- tu carita/robot (opcional) -->
+        <img src="img/logo.png" alt="">
+      </div>
+      <h1>¡Bienvenidos a PictoComunica!</h1>
+    </div>
+
+    <div class="wrap">
+
+      <!-- HERO -->
+      <section class="hero" id="inicio">
+        <div class="logo">
+          <img src="img/logo.png" alt="Logo PictoComunica">
+        </div>
+
+        <div class="brand">PictoComunica</div>
+        <div class="subtitle">
+          Herramientas para facilitar la comunicación,<br>
+          el bienestar y el desarrollo.
+        </div>
+
+        <div class="badge">
+          <i class="fa-solid fa-sparkles"></i>
+          pictogramas · rutinas · voz
+        </div>
+
+        <div class="social">
+          <!-- CAMBIÁ tus links -->
+          <a href="https://www.instagram.com/TU_INSTAGRAM/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/549XXXXXXXXXX" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:TU_MAIL@correo.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://pictocomunica.com.ar/" target="_blank" aria-label="Web"><i class="fas fa-globe"></i></a>
+        </div>
+      </section>
+
+      <!-- CATEGORÍAS (como estaban, bien coloridas) -->
+      <div class="section-title" style="margin-top:18px;">
+        <span class="line"></span> Pictogramas Categorías <span class="line"></span>
+      </div>
+
+      <section class="cats" aria-label="Categorías">
+        <button class="cat c-rutina" type="button"><span>Rutina</span><i class="fa-regular fa-clock"></i></button>
+        <button class="cat c-numeros" type="button"><span>Números</span><i class="fa-solid fa-calculator"></i></button>
+        <button class="cat c-letras" type="button"><span>Letras</span><i class="fa-solid fa-a"></i></button>
+        <button class="cat c-emociones" type="button"><span>Emociones</span><i class="fa-regular fa-face-smile"></i></button>
+        <button class="cat c-hablemos" type="button"><span>Hablemos</span><i class="fa-regular fa-comments"></i></button>
+        <button class="cat c-dibujar" type="button"><span>Dibujar</span><i class="fa-solid fa-pen"></i></button>
+        <button class="cat c-ingles" type="button"><span>Inglés</span><i class="fa-solid fa-language"></i></button>
+        <button class="cat c-animales" type="button"><span>Animales</span><i class="fa-solid fa-paw"></i></button>
+      </section>
+
+      <!-- LINKS PRINCIPALES -->
+      <section class="links">
+        <a class="link" href="https://pictocomunica.com.ar/pictogramas.html" target="_blank">
+          <span class="ico"><i class="fa-solid fa-tablet-screen-button"></i></span>
+          <span>
+            Abrir Pictogramas
+            <small>Entrá directo a la grilla para armar frases</small>
+          </span>
+        </a>
+
+        <a class="link" href="#demo" id="btnDemo">
+          <span class="ico"><i class="fa-regular fa-circle-play"></i></span>
+          <span>
+            Probar mini demo (frase + voz)
+            <small>Para mostrar en 10 segundos cómo funciona</small>
+          </span>
+        </a>
+
+        <a class="link" href="https://pictocomunica.com.ar/indexpicto.html" target="_blank">
+          <span class="ico"><i class="fa-solid fa-house"></i></span>
+          <span>
+            Ver categorías (inicio)
+            <small>Como tu pantalla principal</small>
+          </span>
+        </a>
+
+        <a class="link" href="https://wa.me/549XXXXXXXXXX" target="_blank">
+          <span class="ico"><i class="fa-brands fa-whatsapp"></i></span>
+          <span>
+            Contactanos
+            <small>Te ayudo a configurarlo para tu hijo/a o tu escuela</small>
+          </span>
+        </a>
+      </section>
+
+      <!-- DEMO -->
+      <section id="demo" class="demo-wrap">
+        <div class="demo-head">
+          <div><strong>Demo rápida:</strong> tocá pictos → armá frase → reproducí</div>
+          <button class="demo-close" id="btnClose" aria-label="Cerrar demo"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="demo">
+          <strong style="font-family:Nunito,system-ui,sans-serif;font-weight:900;">Armador de frases (mini)</strong>
+          <p>Ideal para “quiero agua por favor”, “ir al baño”, “gracias”, etc.</p>
+
+          <div class="phrase">
+            <small><i class="fa-solid fa-arrow-pointer"></i> Tu frase (tocá ✕ para borrar)</small>
+            <div class="strip" id="strip"></div>
+          </div>
+
+          <!-- Reemplazá por tus pictos reales -->
+          <div class="grid" aria-label="Pictos demo">
+            <button class="pbtn" data-text="hola" data-img="img/pictos/hola.png"><img src="img/pictos/hola.png" alt="Hola"><span>HOLA</span></button>
+            <button class="pbtn" data-text="quiero" data-img="img/pictos/quiero.png"><img src="img/pictos/quiero.png" alt="Quiero"><span>QUIERO</span></button>
+            <button class="pbtn" data-text="agua" data-img="img/pictos/agua.png"><img src="img/pictos/agua.png" alt="Agua"><span>AGUA</span></button>
+            <button class="pbtn" data-text="por favor" data-img="img/pictos/porfavor.png"><img src="img/pictos/porfavor.png" alt="Por favor"><span>POR FAVOR</span></button>
+
+            <button class="pbtn" data-text="ir" data-img="img/pictos/ir.png"><img src="img/pictos/ir.png" alt="Ir"><span>IR</span></button>
+            <button class="pbtn" data-text="al baño" data-img="img/pictos/baño.png"><img src="img/pictos/baño.png" alt="Baño"><span>BAÑO</span></button>
+            <button class="pbtn" data-text="gracias" data-img="img/pictos/gracias.png"><img src="img/pictos/gracias.png" alt="Gracias"><span>GRACIAS</span></button>
+            <button class="pbtn" data-text="chau" data-img="img/pictos/chau.png"><img src="img/pictos/chau.png" alt="Chau"><span>CHAU</span></button>
+          </div>
+
+          <div class="btns">
+            <button class="btn btn-play" id="btnPlay"><i class="fa-solid fa-play"></i> Reproducir</button>
+            <button class="btn btn-clear" id="btnClear"><i class="fa-solid fa-eraser"></i> Borrar</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        PictoComunica · Comunicación alternativa con pictogramas
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- WhatsApp flotante -->
+  <a class="wa-float" href="https://wa.me/549XXXXXXXXXX" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // Mostrar / cerrar demo
+    const btnDemo = document.getElementById("btnDemo");
+    const demoWrap = document.querySelector(".demo-wrap");
+    const btnClose = document.getElementById("btnClose");
+
+    btnDemo.addEventListener("click", (e)=>{
+      e.preventDefault();
+      demoWrap.style.display = "block";
+      demoWrap.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    btnClose.addEventListener("click", ()=>{
+      demoWrap.style.display = "none";
+      stopVoice();
+      document.getElementById("inicio").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    // Armado de frase
+    const strip = document.getElementById("strip");
+    const pbtns = document.querySelectorAll(".pbtn");
+    const state = { tokens: [] };
+
+    function render(){
+      strip.innerHTML = "";
+      if(state.tokens.length === 0){
+        const t = document.createElement("div");
+        t.style.color = "#64748b";
+        t.style.fontWeight = "900";
+        t.style.fontSize = ".86rem";
+        t.textContent = "Tocá pictos para armar una frase…";
+        strip.appendChild(t);
+        return;
+      }
+      state.tokens.forEach((tok, idx)=>{
+        const el = document.createElement("span");
+        el.className = "token";
+        el.innerHTML = `
+          ${tok.img ? `<img src="${tok.img}" alt="">` : ``}
+          <span>${tok.text}</span>
+          <button type="button" aria-label="Quitar"><i class="fa-solid fa-xmark"></i></button>
+        `;
+        el.querySelector("button").addEventListener("click", ()=>{
+          state.tokens.splice(idx,1);
+          render();
+        });
+        strip.appendChild(el);
+      });
+    }
+
+    pbtns.forEach(b=>{
+      b.addEventListener("click", ()=>{
+        state.tokens.push({ text: b.dataset.text || "", img: b.dataset.img || "" });
+        render();
+      });
+    });
+
+    // Voz (SpeechSynthesis)
+    const btnPlay = document.getElementById("btnPlay");
+    const btnClear = document.getElementById("btnClear");
+
+    function stopVoice(){
+      try{ window.speechSynthesis.cancel(); }catch(e){}
+    }
+
+    function speak(){
+      stopVoice();
+      if(state.tokens.length === 0){
+        state.tokens = [
+          {text:"quiero", img:"img/pictos/quiero.png"},
+          {text:"agua", img:"img/pictos/agua.png"},
+          {text:"por favor", img:"img/pictos/porfavor.png"}
+        ];
+        render();
+      }
+      const text = state.tokens.map(t=>t.text).join(" ").trim();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "es-AR";
+      u.rate = 1;
+      u.volume = 1;
+      window.speechSynthesis.speak(u);
+    }
+
+    btnPlay.addEventListener("click", speak);
+    btnClear.addEventListener("click", ()=>{
+      stopVoice();
+      state.tokens = [];
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
