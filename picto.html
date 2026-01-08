@@ -51,7 +51,6 @@
     *{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
 
-    /* ✅ Fondo sin “azul” en el medio (saqué el blob azul y cambié el degradé base a verde) */
     body{
       font-family:"Poppins",system-ui,-apple-system,sans-serif;
       min-height:100vh;
@@ -61,11 +60,11 @@
       color:var(--ink);
 
       background:
-    radial-gradient(circle at 10% 12%, rgba(82,185,224,.22) 0, transparent 58%),
-    radial-gradient(circle at 92% 18%, rgba(60,129,201,.22) 0, transparent 62%),
-    radial-gradient(circle at 14% 90%, rgba(123,214,243,.20) 0, transparent 60%),
-    radial-gradient(circle at 88% 86%, rgba(99,165,238,.18) 0, transparent 60%),
-    linear-gradient(145deg, #0B2A4A, #0A3E6B);
+        radial-gradient(circle at 10% 12%, rgba(82,185,224,.22) 0, transparent 58%),
+        radial-gradient(circle at 92% 18%, rgba(60,129,201,.22) 0, transparent 62%),
+        radial-gradient(circle at 14% 90%, rgba(123,214,243,.20) 0, transparent 60%),
+        radial-gradient(circle at 88% 86%, rgba(99,165,238,.18) 0, transparent 60%),
+        linear-gradient(145deg, #0B2A4A, #0A3E6B);
     }
 
     .page{
@@ -116,28 +115,44 @@
 
     .wrap{ padding:18px 18px 26px; }
 
-    /* header card */
+    /* ✅ HERO con logo flotante */
     .hero{
+      position:relative;               /* para poder ubicar el logo arriba */
       border-radius:26px;
       background:rgba(255,255,255,.10);
       border:1px solid rgba(255,255,255,.18);
-      padding:16px 14px;
+      padding:56px 14px 16px;          /* ✅ más padding arriba para que el texto no choque */
       box-shadow:0 16px 34px rgba(0,0,0,.16);
       text-align:center;
     }
 
-    /* ✅ logo del medio un poquito más chico y un poquito más abajo */
+    /* ✅ Logo blanco del medio: más arriba, un poquito más chico, y animación sube/baja */
+    @keyframes logoFloat{
+      0%,100%{ transform:translate(-50%,-50%) translateY(0); }
+      50%    { transform:translate(-50%,-50%) translateY(-10px); }
+    }
+
     .logo{
-      width:96px;height:96px;
-      margin:-22px auto 10px; /* antes -34 */
-      border-radius:28px;
+      width:58px;height:58px;          /* ✅ un poquito más chico */
+      position:absolute;
+      left:50%;
+      top:0;                           /* ✅ queda entre el borde superior */
+      transform:translate(-50%,-50%);
+      border-radius:16px;
       background:rgba(255,255,255,.96);
       border:1px solid rgba(15,23,42,.08);
-      box-shadow:0 16px 28px rgba(0,0,0,.18);
+      box-shadow:0 18px 34px rgba(0,0,0,.22);
       display:flex;align-items:center;justify-content:center;
       overflow:hidden;
+      animation:logoFloat 3.2s ease-in-out infinite;
+      will-change:transform;
     }
-    .logo img{width:86%;height:86%;object-fit:contain;display:block;}
+    .logo img{width:88%;height:88%;object-fit:contain;display:block;}
+
+    /* si el usuario no quiere animaciones */
+    @media (prefers-reduced-motion: reduce){
+      .logo{ animation:none; }
+    }
 
     .brand{
       font-family:"Nunito",system-ui,sans-serif;
@@ -193,7 +208,7 @@
       box-shadow:0 10px 22px rgba(0,0,0,.20);
     }
 
-    /* categorias estilo tus botones (✅ vuelven como estaban: bien coloridos) */
+    /* categorias */
     .section-title{
       margin:16px 2px 10px;
       font-family:"Nunito",system-ui,sans-serif;
@@ -246,7 +261,7 @@
     .c-ingles{background:linear-gradient(135deg,var(--ingles), #fff0a3); color:#18322E;}
     .c-animales{background:linear-gradient(135deg,var(--animales), #9bff9f); color:#18322E;}
 
-    /* LINKS (✅ quedan como estaban) */
+    /* LINKS */
     .links{
       margin-top:14px;
       display:flex;
@@ -288,7 +303,7 @@
       font-size:.78rem;
     }
 
-    /* DEMO - barra amarilla como tu pagina pictos */
+    /* DEMO */
     .demo-wrap{ margin-top:14px; display:none; }
     .demo-head{
       border-radius:18px;
@@ -381,7 +396,7 @@
     .btn-play{background:linear-gradient(135deg,var(--letras), #2e8a2a); color:#fff;}
     .btn-clear{background:linear-gradient(135deg,var(--bar-1), var(--bar-3)); color:#18322E;}
 
-    /* WhatsApp flotante como tu web */
+    /* WhatsApp flotante */
     .wa-float{
       position:fixed;
       right:18px;
@@ -410,7 +425,8 @@
 
     @media (max-width:420px){
       .grid{grid-template-columns:repeat(3, 1fr);}
-      .logo{ width:90px; height:90px; margin:-18px auto 10px; border-radius:26px; }
+      .hero{ padding:54px 14px 16px; }
+      .logo{ width:52px; height:52px; border-radius:14px; }
     }
   </style>
 </head>
@@ -420,7 +436,6 @@
 
     <div class="topbar">
       <div class="mascota" aria-hidden="true">
-        <!-- tu carita/robot (opcional) -->
         <img src="img/logo.png" alt="">
       </div>
       <h1>¡Bienvenidos a PictoComunica!</h1>
@@ -454,7 +469,7 @@
         </div>
       </section>
 
-      <!-- CATEGORÍAS (como estaban, bien coloridas) -->
+      <!-- CATEGORÍAS -->
       <div class="section-title" style="margin-top:18px;">
         <span class="line"></span> Pictogramas Categorías <span class="line"></span>
       </div>
@@ -483,7 +498,7 @@
         <a class="link" href="#demo" id="btnDemo">
           <span class="ico"><i class="fa-regular fa-circle-play"></i></span>
           <span>
-            Probar mini demo (frase + voz)
+            Demo (frase + voz)
             <small>Para mostrar en 10 segundos cómo funciona</small>
           </span>
         </a>
@@ -521,7 +536,6 @@
             <div class="strip" id="strip"></div>
           </div>
 
-          <!-- Reemplazá por tus pictos reales -->
           <div class="grid" aria-label="Pictos demo">
             <button class="pbtn" data-text="hola" data-img="img/pictos/hola.png"><img src="img/pictos/hola.png" alt="Hola"><span>HOLA</span></button>
             <button class="pbtn" data-text="quiero" data-img="img/pictos/quiero.png"><img src="img/pictos/quiero.png" alt="Quiero"><span>QUIERO</span></button>
@@ -548,13 +562,11 @@
     </div>
   </div>
 
-  <!-- WhatsApp flotante -->
   <a class="wa-float" href="https://wa.me/549XXXXXXXXXX" target="_blank" aria-label="WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
   <script>
-    // Mostrar / cerrar demo
     const btnDemo = document.getElementById("btnDemo");
     const demoWrap = document.querySelector(".demo-wrap");
     const btnClose = document.getElementById("btnClose");
@@ -571,7 +583,6 @@
       document.getElementById("inicio").scrollIntoView({behavior:"smooth", block:"start"});
     });
 
-    // Armado de frase
     const strip = document.getElementById("strip");
     const pbtns = document.querySelectorAll(".pbtn");
     const state = { tokens: [] };
@@ -610,7 +621,6 @@
       });
     });
 
-    // Voz (SpeechSynthesis)
     const btnPlay = document.getElementById("btnPlay");
     const btnClear = document.getElementById("btnClear");
 
